@@ -10,11 +10,12 @@ exports.getTours = async (req, res) => {
         tours,
       },
     });
-  } catch (error) {}
-  res.status(404).json({
-    status: 'fail',
-    message: error,
-  });
+  } catch (error) {
+    res.status(404).json({
+      status: 'fail',
+      message: error,
+    });
+  }
 };
 
 exports.getTourById = async (req, res) => {
@@ -64,6 +65,23 @@ exports.updateTour = async (req, res) => {
       },
     });
   } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: error,
+    });
+  }
+};
+
+exports.deleteTour = async (req, res) => {
+  try {
+    const tour = await Tour.findByIdAndDelete(req.params.id);
+    res.status(201).json({
+      status: 'success',
+      data: {
+        tour,
+      },
+    });
+  } catch (error) {
     res.status(404).json({
       status: 'fail',
       message: error,
