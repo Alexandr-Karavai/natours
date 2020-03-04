@@ -14,14 +14,30 @@ router.route('/stats').get(tourController.getTourStats);
 router.use('/:tourId/reviews', reviewRouter);
 
 router
+  .route('/tours-within/:distance/center/:latlng/unit/:unit')
+  .get(tourController.getToursWithin);
+// /tours-within?distance=233&center=-40,45&unit=mi
+// /tours-within/233/center/-40,45/unit/mi
+
+router.route('/distances/:latlng/unit/:unit').get(tourController.getDistances);
+
+router
   .route('/')
-  .get(authController.protect, tourController.getTours)
-  .post(tourController.createTour);
+  .get(tourController.getTours)
+  .post(
+    authController.protect,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.createTour
+  );
 
 router
   .route('/:id')
   .get(tourController.getTourById)
-  .patch(tourController.updateTour)
+  .patch(
+    authController.protect,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.updateTour
+  )
   .delete(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
