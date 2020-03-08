@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const sanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -14,10 +15,14 @@ const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 // 1) GLOBAL MIDDLEWARES
+app.use(express.static(path.join(__dirname, 'public')));
 // Set security HTTP headers
 app.use(helmet());
 
@@ -34,6 +39,9 @@ const limitReq = rateLimit({
 app.use('/api', limitReq);
 //Body parser
 app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(cookieParser());
+
 //Data sanitize
 app.use(sanitize());
 app.use(xss());
@@ -51,8 +59,6 @@ app.use(
   })
 );
 
-app.use(express.static(`${__dirname}/public`));
-
 app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use((req, res, next) => {
@@ -60,6 +66,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
