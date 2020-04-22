@@ -30,13 +30,12 @@ if (logOutBtn) logOutBtn.addEventListener('click', e => logOut());
 if (updateForm) {
   updateForm.addEventListener('submit', e => {
     e.preventDefault();
-    document.querySelector('.btn--save-settings').textContent = 'Updating...';
-
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-
-    updateData({ name, email }, 'data');
-    document.querySelector('.btn--save-settings').textContent = 'Updating...';
+    const form = new FormData();
+    form.append('name', document.getElementById('name').value);
+    form.append('email', document.getElementById('email').value);
+    form.append('photo', document.getElementById('photo').files[0]);
+    console.log(form);
+    updateData(form, 'data');
   });
 }
 
