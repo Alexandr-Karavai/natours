@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const sanitize = require('express-mongo-sanitize');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const cors = require('cors');
 
 const AppError = require('./utils/appError');
@@ -62,6 +63,8 @@ app.use(
     ]
   })
 );
+
+app.use(compression());
 
 app.use(morgan('combined', { stream: accessLogStream }));
 
