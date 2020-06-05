@@ -32,7 +32,7 @@ body {
   font-weight: 300;
   font-family: 'Lato', sans-serif;
   color: #777;
-  padding: 3rem;
+  /*padding: 3rem;*/
   min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1322,4 +1322,135 @@ body {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
+}
+
+/*@media only screen and (min-width: 600px) {*/
+/*  !* For tablets: *!*/
+/*  .card-container {*/
+/*    grid-template-columns: repeat(2, 1fr);*/
+/*  }*/
+/*}*/
+
+@media only screen and (max-width: 999px) {
+  /* For mobile phones: */
+  /* For tablets: */
+  .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .header__logo {
+    margin-bottom: 0;
+  }
+
+  .nav--tours {
+    margin-bottom: 0;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer {
+    padding: 4rem;
+    font-size: 1rem;
+  }
+
+  .user-view__form-container {
+    padding: 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  /* For tablets: */
+  .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .header__logo {
+    margin-bottom: 0;
+  }
+
+  .nav--tours {
+    margin-bottom: 0;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .footer {
+    padding: 4rem;
+    font-size: 1rem;
+  }
+  /*Section info*/
+  .section-header {
+    height: auto;
+  }
+
+  .heading-primary {
+    font-size: 4rem;
+  }
+
+  .heading-box__detail {
+    font-size: 2rem;
+  }
+  .section-description {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 602px) {
+  /* For mobile phones: */
+  .main {
+    padding: 2rem;
+  }
+  .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .header__logo {
+    margin-bottom: 0;
+    display: none;
+  }
+
+  /*.nav--tours {*/
+  /*  display: none;*/
+  /*}*/
+
+  .nav {
+    flex-direction: row;
+  }
+
+  .nav__el:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 0;
+    padding-right: 5px;
+  }
+
+  .login-form {
+    padding: 2rem;
+  }
+  /*Section info*/
+  .section-header {
+    height: auto;
+  }
+
+  .heading-primary {
+    font-size: 2rem;
+  }
+
+  .heading-box__detail {
+    font-size: 1rem;
+  }
+  .section-description {
+    flex-direction: column;
+  }
+}
+
+i.fa.fa-sign-in.fa-2x {
+  padding-left: 5px;
 }
